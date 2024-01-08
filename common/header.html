@@ -1,8 +1,8 @@
 <script type="text/discourse-plugin" version="0.8">
   const ajax = require('discourse/lib/ajax').ajax;
+  import { getOwner } from '@ember/application'
   const { h } = require('virtual-dom');
   const { iconNode } = require("discourse-common/lib/icon-library");
-  const { getOwner } = require("discourse-common/lib/get-owner");
   const topicController = getOwner(this).lookup("controller:topic");
 
   if(settings.timeline_buttons_enabled){
@@ -25,13 +25,13 @@
       click() {
         topicController.send('jumpBottom');
       }
-    }); 
-  
-  
+    });
+
+
   }
 
   if (settings.mobile_buttons_enabled){
-  
+
     api.createWidget('mobile-scroll-up-button', {
       tagName: 'widget-button.btn.btn-default.popup-menu-button.no-text.btn-icon.discourse-mobile-scroll-up-button',
       html(attrs, state) {
@@ -50,38 +50,38 @@
       click() {
         topicController.send('jumpBottom');
       }
-    }); 
-    
+    });
+
   }
-  
+
   if (settings.jump_button_enabled){
-  
+
     api.registerTopicFooterButton({
       id: "discourse-jump-button",
       icon: "arrow-up",
       priority: 0,
-    
+
       translatedLabel() {
         return settings.jump_button_label;
       },
       translatedTitle() {
         return settings.jump_button_title;
-      },    
+      },
       action() {
         topicController.send('jumpTop');
       },
       classNames: ["discourse-jump-button"],
     });
-    
+
   }
 
-  
+
 </script>
 
 
 <script type="text/x-handlebars" data-template-name="/connectors/before-topic-progress/mobile-scroll-buttons">
 
-    {{#if  (theme-setting "mobile_buttons_enabled")}}  
+    {{#if  (theme-setting "mobile_buttons_enabled")}}
       {{mount-widget widget="mobile-scroll-up-button"}}
       {{mount-widget widget="mobile-scroll-down-button"}}
     {{/if}}
