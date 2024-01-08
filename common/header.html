@@ -1,9 +1,9 @@
 <script type="text/discourse-plugin" version="0.8">
   const ajax = require('discourse/lib/ajax').ajax;
-  import { getOwner } from '@ember/application'
   const { h } = require('virtual-dom');
   const { iconNode } = require("discourse-common/lib/icon-library");
-  const topicController = getOwner(this).lookup("controller:topic");
+  const { getOwnerWithFallback } = require("discourse-common/lib/get-owner");
+  const topicController = getOwnerWithFallback(this).lookup("controller:topic");
 
   if(settings.timeline_buttons_enabled){
 
